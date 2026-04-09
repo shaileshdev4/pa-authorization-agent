@@ -27,18 +27,19 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the full source tree — shared/, healthcare_agent/, general_agent/, orchestrator/.
+# Copy the full source tree — shared/, pa_agent/, healthcare_agent/, general_agent/, orchestrator/.
 COPY . .
 
 # Cloud Run automatically sets PORT to 8080; override for local Docker testing.
 ENV PORT=8080
 
-# Which A2A agent to serve.  Set via --set-env-vars at deploy time.
+# Which A2A agent to serve.  Set via --set-env-vars at deploy time (Cloud Run / Railway).
 # Valid values:
+#   pa_agent.app:a2a_app           (prior authorization + MCP — default for this image)
 #   healthcare_agent.app:a2a_app   (authenticated, FHIR-connected — port 8001 locally)
 #   general_agent.app:a2a_app      (public, no key required — port 8002 locally)
 #   orchestrator.app:a2a_app       (authenticated, delegates to both — port 8003 locally)
-ENV AGENT_MODULE=healthcare_agent.app:a2a_app
+ENV AGENT_MODULE=pa_agent.app:a2a_app
 
 # exec replaces the shell so uvicorn is PID 1 and receives SIGTERM from Cloud Run.
 CMD ["sh", "-c", "exec uvicorn ${AGENT_MODULE} --host 0.0.0.0 --port ${PORT}"]
