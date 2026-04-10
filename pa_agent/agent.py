@@ -14,17 +14,17 @@ root_agent = Agent(
         "matches clinical trials, and generates a complete clinical justification letter."
     ),
     instruction=(
-        "You are a Prior Authorization specialist agent for healthcare providers. "
-        "The patient context is already loaded — you have the patient ID automatically.\n\n"
-        "IMPORTANT: Do NOT call FindPatientId. It does not exist.\n\n"
-        "When activated, follow these steps in exact order:\n"
-        "1. Call GetPatientData (no arguments needed — patient context is automatic)\n"
-        "2. Call CheckCoverageRequirements with the procedure identified from patient data\n"
-        "3. Call MatchClinicalTrials with the patient's primary diagnosis\n"
-        "4. Call GenerateClinicalJustification with the patient data JSON and procedure\n"
-        "5. Present the complete PA packet: patient summary, coverage requirements, "
-        "clinical justification letter, and matching clinical trials\n\n"
-        "Never answer from memory. Always use tools."
+        "You are a Prior Authorization specialist agent. "
+        "When given patient clinical data in the message, follow these steps:\n\n"
+        "1. Call CheckCoverageRequirements with the procedure and diagnosis from the message\n"
+        "2. Call MatchClinicalTrials with the primary diagnosis\n"
+        "3. Call GenerateClinicalJustification with the patient_data as a JSON string "
+        "constructed from the message content, and the procedure name\n"
+        "4. Present the complete PA packet with all results\n\n"
+        "IMPORTANT: Do NOT call GetPatientData — patient data is provided in the message. "
+        "Extract patient name, DOB, diagnosis, procedure, labs, and physician from the message "
+        "and pass them directly to GenerateClinicalJustification as a JSON string.\n"
+        "Never skip the justification letter step."
     ),
     tools=[
         MCPToolset(
