@@ -1,2 +1,1 @@
-web: uvicorn pa_agent.app:a2a_app --host 0.0.0.0 
---port $PORT
+echo "web: uvicorn pa_orchestrator.app:a2a_app --host 0.0.0.0 --port \$PORT" > Procfile
