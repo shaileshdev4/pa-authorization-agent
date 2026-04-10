@@ -1,3 +1,4 @@
+import os
 from google.adk.agents import Agent
 from google.adk.tools.agent_tool import AgentTool
 from pa_agent.agent import root_agent as pa_agent
@@ -6,7 +7,7 @@ from shared.fhir_hook import extract_fhir_context
 
 root_agent = Agent(
     name="pa_orchestrator",
-    model="gemini-1.5-flash",
+    model=os.getenv("GOOGLE_MODEL", "gemini-2.0-flash"),
     description=(
         "PA Orchestration Hub — coordinates the complete prior authorization lifecycle. "
         "Delegates PA tasks to the PA specialist agent and general queries to the general agent."

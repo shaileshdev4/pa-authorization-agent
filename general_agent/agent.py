@@ -11,13 +11,14 @@ To customise:
   • If you later need FHIR access, import extract_fhir_context from shared.fhir_hook
     and add it as before_model_callback, then import FHIR tools from shared.tools.
 """
+import os
 from google.adk.agents import Agent
 
 from .tools import get_current_datetime, look_up_icd10
 
 root_agent = Agent(
     name="general_agent",
-    model="gemini-2.5-flash",
+    model=os.getenv("GOOGLE_MODEL", "gemini-2.0-flash"),
     description=(
         "A general-purpose clinical assistant for date/time queries "
         "and ICD-10-CM code lookups. Does not require patient context."
