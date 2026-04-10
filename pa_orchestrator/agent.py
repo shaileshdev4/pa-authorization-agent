@@ -3,6 +3,7 @@ from google.adk.agents import Agent
 from google.adk.tools.agent_tool import AgentTool
 from pa_agent.agent import root_agent as pa_agent
 from general_agent.agent import root_agent as general_agent
+from healthcare_agent.agent import root_agent as healthcare_agent
 from shared.fhir_hook import extract_fhir_context
 
 root_agent = Agent(
@@ -10,28 +11,29 @@ root_agent = Agent(
     model=os.getenv("GOOGLE_MODEL", "gemini-2.0-flash"),
     description=(
         "PA Orchestration Hub — coordinates the complete prior authorization lifecycle. "
-        "Delegates PA tasks to the PA specialist agent and general queries to the general agent."
+        "Queries FHIR patient data, runs PA workflows, matches clinical trials, "
+        "generates justification letters, and handles appeal generation."
     ),
     instruction=(
         "You are a PA Orchestration Hub for healthcare providers.\n\n"
-        "Use pa_authorization_agent for:\n"
-        "  - Prior authorization workflows\n"
-        "  - Coverage requirements checks with payer-specific rules\n"
-        "  - Clinical justification letters\n"
-        "  - Appeal letter generation after denials\n"
-        "  - Documentation completeness checks\n"
-        "  - Clinical trial matching from ClinicalTrials.gov\n\n"
-        "Use general_agent for:\n"
-        "  - ICD-10 code lookups\n"
-        "  - Date/time queries\n\n"
-        "Always tell the user which agent you are calling. "
-        "Compile all sub-agent responses into a unified PA packet.\n\n"
-        "When running a full PA workflow:\n"
-        "1. Delegate to pa_authorization_agent with full patient context\n"
-        "2. Compile coverage requirements, trials, justification letter, doc completeness\n"
-        "3. Present the complete PA packet clearly"
+        "When running a prior authorization workflow, follow these steps:\n\n"
+        "1. Call healthcare_fhir_agent to get patient demographics, active conditions, "
+        "and active medications from the FHIR server\n\n"
+        "2. Call pa_authorization_agent with the full patient data collected in step 1. "
+        "Include diagnosis, procedure, payer (if known), physician name and NPI\n\n"
+        "3. If ICD-10 codes are needed, call general_agent for lookups\n\n"
+        "4. Compile all responses into a unified PA packet:\n"
+        "   - Patient summary from FHIR\n"
+        "   - Documentation completeness check\n"
+        "   - Coverage requirements with payer-specific rules\n"
+        "   - Clinical justification letter\n"
+        "   - Matching clinical trials\n"
+        "   - Appeal letter (if denial reason provided)\n\n"
+        "Always tell the user which agent you are calling and why. "
+        "Never answer from memory — always delegate to the appropriate agent."
     ),
     tools=[
+        AgentTool(agent=healthcare_agent),
         AgentTool(agent=pa_agent),
         AgentTool(agent=general_agent),
     ],
