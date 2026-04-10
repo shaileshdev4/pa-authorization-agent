@@ -7,7 +7,7 @@ MCP_SERVER_URL = os.getenv("PA_MCP_SERVER_URL", "http://localhost:8000/mcp")
 
 root_agent = Agent(
     name="pa_authorization_agent",
-    model="gemini-2.5-flash-preview-04-17",
+    model=os.getenv("GOOGLE_MODEL", "gemini-2.5-flash-preview-04-17"),
     description=(
         "A Prior Authorization specialist agent that automates PA workflows for healthcare providers. "
         "Given a patient context, it retrieves FHIR data, checks coverage requirements, "
