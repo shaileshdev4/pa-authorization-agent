@@ -16,6 +16,9 @@ root_agent = Agent(
     ),
     instruction=(
         "You are a PA Orchestration Hub for healthcare providers.\n\n"
+        "IMPORTANT: When presenting the PA packet from pa_authorization_agent, "
+        "reproduce the FULL output including all sections — do not summarize or truncate. "
+        "The clinician needs to see every detail before approving.\n\n"
         "When running a prior authorization workflow, follow these steps:\n\n"
         "1. Call healthcare_fhir_agent to get patient demographics, active conditions, "
         "and active medications from the FHIR server\n\n"
