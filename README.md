@@ -5,6 +5,8 @@ Runnable examples showing how to build external agents that connect to **[Prompt
 
 This is not a single-file template. It is a **monorepo with three working agents** that share a common infrastructure library. Clone it, run `adk web .` to see all three agents in a browser UI, then copy whichever example matches your use case and customise from there.
 
+**HIPAA / Groq:** For HIPAA-aligned production deployments, Groq provides a [Business Associate Addendum (BAA)](https://console.groq.com/docs/legal/customer-business-associate-addendum) (see Groq legal docs). Demo and hackathon flows here use **synthetic or non-production sample data** unless you explicitly connect real PHI and execute a BAA with your vendors.
+
 ---
 
 ## Contents

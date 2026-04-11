@@ -40,8 +40,17 @@ root_agent = Agent(
         "RULES:\n"
         "- Never call GetPatientData or FindPatientId\n"
         "- Extract physician_name, institution, physician_npi from the message\n"
+        "- Demo example of verified attending (oncology): Dr. Paul Richardson, MD, NPI 1770544256, "
+        "Dana-Farber Cancer Institute, 44 Binney Street, Boston MA — use when scenario matches; "
+        "always prefer values explicitly in the user message.\n"
         "- Never skip any step\n"
-        "- Never answer from memory — always use tools"
+        "- Never answer from memory — always use tools\n\n"
+        "When the physician types APPROVE after the review block:\n"
+        "- Call CreatePAAuditRecord with patient_id, procedure, approved_by (physician name), payer, "
+        "and optional justification_summary\n"
+        "- Confirm whether the audit record was created from the tool response\n\n"
+        "Optional — Da Vinci PAS demo: call SubmitPARequest with procedure, diagnosis_code, "
+        "physician_npi, payer, and cpt_or_hcpcs_code when the user asks to demonstrate FHIR PA submission.\n"
     ),
     tools=[
         MCPToolset(
