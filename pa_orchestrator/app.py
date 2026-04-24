@@ -44,7 +44,7 @@ async def patched_agent_card(request: Request):
         "name": "pa_orchestrator",
         "description": "PA Orchestration Hub — automates the complete prior authorization lifecycle by coordinating specialist agents for coverage checks, clinical trial matching, justification letters, appeal generation, and documentation completeness.",
         "version": "1.0.0",
-        "protocolVersion": "0.3.0",
+        "protocolVersion": "1.0",
         "url": agent_url,
         "preferredTransport": "JSONRPC",
         "defaultInputModes": ["text/plain"],
@@ -53,7 +53,12 @@ async def patched_agent_card(request: Request):
             {
                 "url": agent_url,
                 "protocolBinding": "JSONRPC",
-                "protocolVersion": "0.3.0",
+                "protocolVersion": "1.0",
+            },
+            {
+                "url": f"{agent_url}/a2a-http-json",
+                "protocolBinding": "HTTP+JSON",
+                "protocolVersion": "1.0",
             }
         ],
         "additionalInterfaces": [
@@ -79,6 +84,8 @@ async def patched_agent_card(request: Request):
                 "id": "prior-authorization-orchestration",
                 "name": "prior-authorization-orchestration",
                 "description": "Complete PA lifecycle — coverage check, clinical trials, justification letter, appeal generation, documentation completeness.",
+                "tags": [],
+                "examples": [],
             }
         ],
         "securitySchemes": {
@@ -88,7 +95,6 @@ async def patched_agent_card(request: Request):
                 "in": "header",
             }
         },
-        "security": [{"apiKey": []}],
     }
     return JSONResponse(card)
 
