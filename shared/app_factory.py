@@ -50,7 +50,6 @@ from a2a.types import (
     AgentExtension,
     AgentSkill,
     APIKeySecurityScheme,
-    In,
     SecurityScheme,
 )
 from google.adk.a2a.utils.agent_to_a2a import to_a2a
@@ -109,7 +108,7 @@ def create_a2a_app(
                 root=APIKeySecurityScheme(
                     type="apiKey",
                     name="X-API-Key",
-                    in_=In.header,
+                    in_="header",
                     description="API key required to access this agent.",
                 )
             )
