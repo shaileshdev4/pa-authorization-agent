@@ -90,3 +90,8 @@ async def patched_agent_card(request: Request):
         "security": [{"apiKey": []}],
     }
     return JSONResponse(card)
+
+
+# Ensure this patched route takes precedence over the SDK-provided card route.
+if a2a_app.router.routes:
+    a2a_app.router.routes.insert(0, a2a_app.router.routes.pop())
