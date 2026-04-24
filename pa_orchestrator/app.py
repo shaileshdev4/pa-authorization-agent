@@ -53,6 +53,7 @@ async def patched_agent_card(request: Request):
             {
                 "url": agent_url,
                 "protocolBinding": "JSONRPC",
+                "protocolVersion": "0.3.0",
             }
         ],
         "additionalInterfaces": [
