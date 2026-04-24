@@ -7,7 +7,7 @@ MCP_SERVER_URL = os.getenv("PA_MCP_SERVER_URL", "http://localhost:8000/mcp")
 
 root_agent = Agent(
     name="pa_authorization_agent",
-    model=os.getenv("GOOGLE_MODEL", "gemini-2.0-flash"),
+    model=os.getenv("GOOGLE_MODEL", "gemini-2.5-flash"),
     description=(
         "A Prior Authorization specialist agent that automates PA workflows. "
         "Checks coverage requirements, matches clinical trials, and generates "
@@ -21,6 +21,9 @@ root_agent = Agent(
         "3. Call MatchClinicalTrials with the primary diagnosis\n"
         "4. Call GenerateClinicalJustification with patient_data, procedure, "
         "physician_name, institution, physician_npi extracted from the message\n"
+        "4b. Call VerifyPALetter with the justification_letter and patient_data\n"
+        "    — if verdict is DO_NOT_SUBMIT, show unsupported claims to physician\n"
+        "    — include safety_score in the PA packet\n"
         "5. If a denial_reason is provided, call GenerateAppealLetter\n"
         "6. Present the complete PA packet\n"
         "7. When calling GenerateClinicalJustification and GenerateAppealLetter:\n"
