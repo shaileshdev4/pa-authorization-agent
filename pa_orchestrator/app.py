@@ -95,6 +95,7 @@ async def patched_agent_card(request: Request):
                 "in": "header",
             }
         },
+        "security": [{"apiKey": []}],
     }
     return JSONResponse(card)
 
