@@ -23,10 +23,9 @@ logger = logging.getLogger(__name__)
 
 LOG_FULL_PAYLOAD = os.getenv("LOG_FULL_PAYLOAD", "true").lower() == "true"
 
-# Replace / extend with keys loaded from your environment or secrets store.
+# Load allowed API keys from environment.
 VALID_API_KEYS: set = {
-    "my-secret-key-123",    # your application's key
-    "another-valid-key",    # any other trusted callers
+    k for k in [os.getenv("API_KEY")] if k
 }
 
 
