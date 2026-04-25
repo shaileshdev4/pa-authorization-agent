@@ -54,17 +54,6 @@ async def patched_agent_card(request: Request):
                 "url": agent_url,
                 "protocolBinding": "JSONRPC",
                 "protocolVersion": "1.0",
-            },
-            {
-                "url": f"{agent_url}/a2a-http-json",
-                "protocolBinding": "HTTP+JSON",
-                "protocolVersion": "1.0",
-            }
-        ],
-        "additionalInterfaces": [
-            {
-                "transport": "HTTP+JSON",
-                "uri": f"{agent_url}/a2a-http-json",
             }
         ],
         "capabilities": {
