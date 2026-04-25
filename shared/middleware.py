@@ -272,12 +272,13 @@ class ApiKeyMiddleware(BaseHTTPMiddleware):
             from starlette.responses import Response as StarletteResponse
             headers = dict(response.headers)
             headers["content-length"] = str(len(resp_body))
+            headers["content-type"] = "application/a2a+json"
             # PO expects application/a2a+json, not application/json
             return StarletteResponse(
                 content=resp_body,
                 status_code=response.status_code,
                 headers=headers,
-                media_type=response.media_type,
+                media_type="application/a2a+json",
             )
 
         return response
