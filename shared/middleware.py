@@ -218,7 +218,7 @@ class ApiKeyMiddleware(BaseHTTPMiddleware):
                 #   - artifact parts have no "kind" field — just {"text": "..."}
                 #   - Content-Type: application/a2a+json
                 _STATE_MAP = {
-                    "completed":      "TASK_STATE_WORKING",
+                    "completed":      "TASK_STATE_COMPLETED",
                     "working":        "TASK_STATE_WORKING",
                     "submitted":      "TASK_STATE_SUBMITTED",
                     "input-required": "TASK_STATE_INPUT_REQUIRED",
