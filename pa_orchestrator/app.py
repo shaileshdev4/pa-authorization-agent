@@ -57,7 +57,7 @@ async def patched_agent_card(request: Request):
             }
         ],
         "capabilities": {
-            "streaming": True,
+            "streaming": False,
             "pushNotifications": False,
             "stateTransitionHistory": True,
             "extensions": [
