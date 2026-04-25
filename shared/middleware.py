@@ -49,6 +49,8 @@ class ApiKeyMiddleware(BaseHTTPMiddleware):
         except json.JSONDecodeError:
             pretty_body = body_text
 
+        logger.info("REQUEST_METHOD_CALLED: %s", parsed.get("method", "NO_METHOD_FOUND"))
+
         if LOG_FULL_PAYLOAD:
             logger.info(
                 "incoming_http_request path=%s method=%s headers=%s\npayload=\n%s",
