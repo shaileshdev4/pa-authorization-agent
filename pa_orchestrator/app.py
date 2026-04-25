@@ -89,13 +89,13 @@ async def patched_agent_card(request: Request):
             }
         ],
         "securitySchemes": {
-            "apiKey": {
-                "type": "apiKey",
-                "name": "X-API-Key",
-                "in": "header",
+            "prompt-opinion-api-key": {
+                "apiKeySecurityScheme": {
+                    "name": "X-API-Key",
+                    "location": "header",
+                }
             }
         },
-        "security": [{"apiKey": []}],
     }
     return JSONResponse(card)
 
