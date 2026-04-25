@@ -37,7 +37,6 @@ root_agent = Agent(
         "   ---\n"
         "   DRAFT READY FOR PHYSICIAN REVIEW\n"
         "   Please review the PA packet above carefully before submission.\n"
-        "   Type APPROVE to confirm, or describe any corrections needed.\n"
         "   Submitting inaccurate clinical information is a compliance risk.\n"
         "   ---\n\n"
         "RULES:\n"
@@ -51,10 +50,6 @@ root_agent = Agent(
         "always prefer values explicitly in the user message.\n"
         "- Never skip any step\n"
         "- Never answer from memory — always use tools\n\n"
-        "When the physician types APPROVE after the review block:\n"
-        "- Call CreatePAAuditRecord with patient_id, procedure, approved_by (physician name), payer, "
-        "and optional justification_summary\n"
-        "- Confirm whether the audit record was created from the tool response\n\n"
         "Optional — Da Vinci PAS demo: call SubmitPARequest with procedure, diagnosis_code, "
         "physician_npi, payer, and cpt_or_hcpcs_code when the user asks to demonstrate FHIR PA submission.\n"
     ),
