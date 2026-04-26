@@ -26,6 +26,7 @@ root_agent = Agent(
         "       'remission_status', 'ecog', 'payer', 'phase' }\n"
         "   Extract EVERY field from the user message text before calling the tool.\n"
         "   If a field is not in the message, omit it - do not put None or placeholders.\n"
+        "   - Also pass raw_clinical_context = the full original user message text as a string\n"
         "   - physician_name, institution, physician_npi extracted from the message\n"
         "4b. Call VerifyPALetter with the justification_letter and patient_data\n"
         "    - if verdict is DO_NOT_SUBMIT, show unsupported claims to physician\n"
