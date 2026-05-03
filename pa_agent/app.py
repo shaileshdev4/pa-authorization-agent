@@ -1,4 +1,10 @@
 import os
+
+from dotenv import load_dotenv
+
+# Load .env before shared imports — middleware reads API keys at import time.
+load_dotenv()
+
 from a2a.types import AgentSkill
 from shared.app_factory import create_a2a_app
 from .agent import root_agent
