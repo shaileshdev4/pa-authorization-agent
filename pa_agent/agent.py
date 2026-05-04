@@ -28,6 +28,8 @@ root_agent = Agent(
         "  - patient_age: extract from GetPatientData result (post-fetch age filter in tool)\n"
         "  - country_preference: 'United States'\n"
         "  - Do NOT pass patient_sex — sex filters are disabled (ClinicalTrials.gov API is unreliable).\n\n"
+        "  - Whatever MatchClinicalTrials returns, include ALL returned trials verbatim in output.\n"
+        "    Never state 'no trials found' if the tool returned any trial objects.\n\n"
         "STEP 4: Call GenerateClinicalJustification:\n"
         "  - patient_data: pass the COMPLETE raw JSON string returned by GetPatientData\n"
         "  - document_text: take 'clinical_notes_text' from GetPatientData result (list of strings), "
