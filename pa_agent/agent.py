@@ -71,6 +71,7 @@ root_agent = Agent(
         "- Always carry the payer from the initial request through all tool calls. If payer is not in the current message, use the payer from the conversation context. Never default to Medicare unless explicitly stated.\n"
         "- Mark missing required fields as [PHYSICIAN TO VERIFY] and continue\n"
         "- Never substitute a fake NPI — if NPI is absent, omit it\n"
+        "- If a denial_reason is provided AND peer-to-peer review is mentioned or Aetna urgent denial pattern applies, call PreparePeerToPeer after GenerateAppealLetter with the denial_reason, patient_data, procedure, and payer.\n"
         "- Do not ask for clarification — complete the workflow with available data\n\n"
         "Optional: call SubmitPARequest when user asks to demonstrate FHIR PA submission.\n"
     ),
